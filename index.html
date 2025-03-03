@@ -2,40 +2,51 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Это не выключить 😈</title>
+    <title>Это не выключить</title>
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
             overflow: hidden;
-            background-color: black;
-            color: white;
+        }
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-size: 30px;
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
-            user-select: none;
+            font-size: 36px;
         }
     </style>
 </head>
 <body>
 
-<div>Это не выключить 😈</div>
-
-<audio id="audio" autoplay loop>
+<div>это не выключить😈</div>
+<audio id="music" loop autoplay>
     <source src="zalupa.mp3" type="audio/mpeg">
     Твой браузер не поддерживает аудио.
 </audio>
 
 <script>
-    document.documentElement.requestFullscreen().catch(() => {
-        console.log("Не удалось включить фуллскрин автоматически");
+    // Автопереход в полноэкранный режим при открытии
+    document.documentElement.requestFullscreen().catch(err => {
+        console.log('Не удалось перейти в полноэкранный режим:', err);
     });
 
-    const audio = document.getElementById('audio');
-    document.body.addEventListener('click', () => {
+    // Если autoplay не сработает из-за браузерных ограничений — запрашиваем вручную
+    const audio = document.getElementById('music');
+    const playMusic = () => {
         audio.play().catch(() => {
-            console.log("Автозапуск заблокирован, кликни ещё раз");
+            console.log('Autoplay заблокирован, ждём клика');
         });
-        document.documentElement.requestFullscreen().catch(() => {});
+    };
+    playMusic();
+
+    // На случай, если браузер потребует взаимодействие — включаем при первом клике
+    document.body.addEventListener('click', playMusic, {once: true});
+</script>
+
+</body>
+</html>
