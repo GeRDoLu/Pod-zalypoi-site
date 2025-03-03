@@ -6,45 +6,39 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
             background-color: black;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+            color: white;
             font-size: 24px;
+            font-family: Arial, sans-serif;
         }
-        #text {
+        #message {
             text-align: center;
         }
     </style>
-</head>
-<body>
-    <div id="text">Это не выключить😈</div>
-    <audio id="audio" loop autoplay>
-        <source src="pod-zalypoy.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудио элемент.
-    </audio>
     <script>
-        const audio = document.getElementById('audio');
-
-        document.body.addEventListener('click', () => {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.warn('Fullscreen отказан:', err);
+        function playAudio() {
+            const audio = document.getElementById('audio');
+            const request = audio.play();
+            if (request !== undefined) {
+                request.catch(error => {
+                    console.log('Автовоспроизведение заблокировано браузером');
                 });
             }
-            audio.play().catch(err => {
-                console.warn('Автозапуск музыки отказан:', err);
-            });
-        });
+            document.documentElement.requestFullscreen().catch(() => {});
+        }
 
-        audio.play().catch(err => {
-            console.warn('Автозапуск музыки отказан:', err);
-        });
+        window.onload = playAudio;
     </script>
+</head>
+<body>
+    <div id="message">Это не выключить😈</div>
+    <audio id="audio" autoplay loop>
+        <source src="zalupa.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
 </body>
 </html>
