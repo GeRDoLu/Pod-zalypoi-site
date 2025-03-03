@@ -2,49 +2,40 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Это не выключить😈</title>
+    <title>Это не выключить 😈</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
+            overflow: hidden;
             background-color: black;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            font-size: 30px;
             font-family: Arial, sans-serif;
-            font-size: 24px;
-        }
-        #text {
-            text-align: center;
+            user-select: none;
         }
     </style>
 </head>
 <body>
-    <div id="text">Это не выключить😈</div>
-    <audio id="audio" loop autoplay>
-        <source src="pod-zalypoy.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудио элемент.
-    </audio>
-    <script>
-        const audio = document.getElementById('audio');
 
-        document.body.addEventListener('click', () => {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.warn('Fullscreen отказан:', err);
-                });
-            }
-            audio.play().catch(err => {
-                console.warn('Автозапуск музыки отказан:', err);
-            });
-        });
+<div>Это не выключить 😈</div>
 
-        audio.play().catch(err => {
-            console.warn('Автозапуск музыки отказан:', err);
+<audio id="audio" autoplay loop>
+    <source src="zalupa.mp3" type="audio/mpeg">
+    Твой браузер не поддерживает аудио.
+</audio>
+
+<script>
+    document.documentElement.requestFullscreen().catch(() => {
+        console.log("Не удалось включить фуллскрин автоматически");
+    });
+
+    const audio = document.getElementById('audio');
+    document.body.addEventListener('click', () => {
+        audio.play().catch(() => {
+            console.log("Автозапуск заблокирован, кликни ещё раз");
         });
-    </script>
-</body>
-</html>
+        document.documentElement.requestFullscreen().catch(() => {});
